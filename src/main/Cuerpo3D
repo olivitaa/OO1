@@ -1,0 +1,29 @@
+public class Cuerpo3D{
+  private double Altura;
+  private Object CaraBasal;
+
+  public Cuerpo3D(double Altura){
+    this.Altura = Altura;
+  }
+
+  public void setAltura (double Altura){
+    this.Altura = Altura;
+  }
+
+  public double getAltura (){
+    return Altura;
+  }
+
+  public void setCaraBasal(Object CaraBasal){
+    this.CaraBasal = CaraBasal;
+  }
+
+  public double getVolumen (){
+    return Altura * this.CaraBasal.getArea;
+  }
+
+  public double getSuperficieExterior (){
+    return 2*(this.CaraBasal.getArea + this.CaraBasal.getPerimetro + this.Altura);
+  }
+
+}
