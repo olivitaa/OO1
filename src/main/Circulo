@@ -1,0 +1,29 @@
+public class Circulo {
+    
+    private double Diametro;
+    private double Radio;
+    
+    public double getDiametro (){
+        return Diametro;
+    }
+    
+    public void setDiametro (double Diametro){
+        this.Diametro = Diametro
+    }
+    
+    public double getRadio (){
+        return Radio;
+    }
+    
+    public void setRadio (double Radio){
+        this.Radio = Radio;
+    }
+    
+    public double getPerimetro (){
+        
+    }
+    
+    public double getArea (){
+        
+    }
+}
