@@ -1,0 +1,5 @@
+public abstract class Object {
+        
+    public abstract double getPerimetro ();
+    public abstract double getArea ();
+    }
