@@ -1,14 +1,14 @@
 public class Circulo {
     
-    private double Diametro;
     private double Radio;
-    
-    public double getDiametro (){
-        return Diametro;
+
+    public Circulo (double Radio){
+
+        this.Radio= Radio;
     }
-    
-    public void setDiametro (double Diametro){
-        this.Diametro = Diametro
+
+    public double getDiametro (){
+        return Radio*2;
     }
     
     public double getRadio (){
@@ -20,10 +20,10 @@ public class Circulo {
     }
     
     public double getPerimetro (){
-        
+        return Radio*Math.PI();
     }
     
     public double getArea (){
-        
+        return Math.PI()*Math.sqrrt(Radio,2);
     }
 }
