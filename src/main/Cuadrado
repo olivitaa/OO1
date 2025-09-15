@@ -1,0 +1,21 @@
+public class Cuadrado extends Object {
+	private double Lado;
+	public Cuadrado (){
+	    
+	}
+	public void setLado (double Lado){
+	    this.Lado= Lado;
+	}
+	
+	public double getLado(){
+	    return Lado;
+	}
+	
+	public double getPerimetro(){
+	    return Lado*3;   
+	}
+	
+	public double getArea(){
+	    return (Math.sqrrt(Lado,2))/2;
+	}
+}
