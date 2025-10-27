@@ -1,0 +1,54 @@
+package ar.edu.unlp.info.oo1.ejercicio19;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+import java.time.LocalDate;
+import org.junit.jupiter.api.BeforeEach;
+
+
+class PropiedadTest {
+
+	Usuario cliente;
+	Propiedad propiedad1;
+	
+	@BeforeEach
+	public void setUp() {
+		cliente = new Usuario ("Olivia","facultad",12345);
+		propiedad1 = new Propiedad (20000,"lp","bsas");
+	}
+	
+	@Test
+
+	public void testCrearReserva() {
+		DateLapse p1=new DateLapse (LocalDate.of(2025, 3, 27),LocalDate.of(2025, 5, 2));
+		DateLapse p2=new DateLapse (LocalDate.of(2025, 6, 5),LocalDate.of(2025, 9, 12));
+		DateLapse perror= new DateLapse (LocalDate.of(2025,3,30),LocalDate.of(2025,4,21));
+		
+		assertTrue(propiedad1.crearReserva(cliente, p1)!=null);
+		//crea la primera reserva correctamente, devuelve no null
+		assertFalse(propiedad1.crearReserva(cliente, perror)!=null); 
+		//espera que no se pueda crear una reserva xq se superpone con la primera fecha, devuelve null si está bien
+		assertTrue(propiedad1.crearReserva(cliente, p2)!=null);
+		//verifica que sí se puede reservar en otro periodo no solapado
+		assertFalse(propiedad1.isDisponible(p1));
+		//como ya hice la reserva en p1, se fija que no esté disponible	
+	}
+	
+	@Test
+	public void testCancelarReserva() {
+		DateLapse periodo = new DateLapse(LocalDate.of(2025, 3, 27),LocalDate.of(2025, 5, 2));
+		Reserva r= propiedad1.crearReserva(cliente, periodo);
+		
+		assertEquals(1, propiedad1.getCantReservas());
+		//verifica que ahora haya una reserva guardada
+		assertFalse(propiedad1.isDisponible(periodo));
+		//verifica que durante el periodi, la reserva no este disponible
+		assertTrue(propiedad1.cancelarReserva(r));
+		assertEquals(0, propiedad1.getCantReservas());
+		//se fija que se haya cancelado la reserva
+		assertTrue(propiedad1.isDisponible(periodo));
+		//verifica que volvió a estar disponible
+	}
+
+}
