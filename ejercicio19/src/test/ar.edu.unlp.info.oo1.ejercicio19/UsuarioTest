@@ -1,0 +1,39 @@
+package ar.edu.unlp.info.oo1.ejercicio19;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import java.time.LocalDate;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+class UsuarioTest {
+	Usuario usu;
+	Propiedad prop1,prop2;
+	
+	@BeforeEach
+	public void setUp() {
+		usu = new Usuario ("Olivia","lp",12345);
+		prop1 = new Propiedad (30000,"lp","bsas");
+		prop2= new Propiedad (40000,"cb","lp");
+	}
+	
+	@Test
+	public void testAgregarPropiedades() {
+		usu.agregarPropiedad(prop1);
+		usu.agregarPropiedad(prop2);
+		assertEquals(2,usu.getCantPropiedades());
+	}
+	
+	@Test
+	public void testCalcularIngresos() {
+		usu.agregarPropiedad(prop1);
+		usu.agregarPropiedad(prop2);
+		prop1.crearReserva(new Usuario("Cliente1", "Dirección 1", 12345678),
+				new DateLapse(LocalDate.of(2024, 2, 10), LocalDate.of(2024, 2, 15)));
+		prop2.crearReserva(new Usuario("Cliente2", "Dirección 2", 87654321),
+				new DateLapse(LocalDate.of(2024, 2, 10), LocalDate.of(2024, 2, 12)));
+		assertEquals(172500, usu.calcularIngresos());
+	}
+
+}
