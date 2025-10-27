@@ -1,0 +1,49 @@
+package ar.edu.unlp.info.oo1.ejercicio19;
+
+import java.util.List;
+import java.util.ArrayList;
+public class Propiedad {
+	private double precio;
+	private String nombre,direccion;
+	private List <Reserva> reservas;
+	
+	public Propiedad(double precio, String nombre, String direccion) {
+		this.precio=precio;
+		this.direccion = direccion;
+		this.nombre=nombre;
+		this.reservas = new ArrayList <Reserva>();
+	}
+	
+	public boolean isDisponible (DateLapse periodo) {
+		return this.reservas.stream().noneMatch(res->res.isDisponible(periodo));
+	}
+	
+	public double getPrecio() {
+		return this.precio;
+	}
+	
+	public Reserva crearReserva(Usuario cliente, DateLapse periodo) {
+		if (this.isDisponible(periodo)) {
+			Reserva r = new Reserva(periodo,cliente,this);
+			this.reservas.add(r);
+			return r;
+		}else {
+			return null;
+		}
+	}
+	
+	
+	public boolean cancelarReserva(Reserva r) {
+		if (r.enCurso()) {
+			return false;
+		}else {
+			this.reservas.remove(r);
+			return true;
+		}
+	}
+	
+	public double montoTotal() {
+		return this.reservas.stream().mapToDouble(res->res.costo()).sum();
+	}
+	
+}
