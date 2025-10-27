@@ -1,0 +1,31 @@
+package ar.edu.unlp.info.oo1.ejercicio19;
+
+import java.time.LocalDate;
+
+public class Reserva {
+	private Usuario cliente;
+	private DateLapse periodo;
+	private Propiedad propiedad;
+	
+	public Reserva(DateLapse periodo, Usuario cliente, Propiedad propiedad) {
+		this.cliente=cliente;
+		this.periodo=periodo;
+		this.propiedad=propiedad;
+	}
+	
+	public boolean isDisponible(DateLapse p) {
+		return this.periodo.overlaps(p);
+	}
+	
+	public int cantDias() {
+		return this.periodo.sizeInDays();
+	}
+	
+	public double costo () {
+		return this.cantDias()*this.propiedad.getPrecio();
+	}
+	
+	public boolean enCurso() {
+		return this.periodo.getFrom().isAfter(LocalDate.now());
+	}
+}
